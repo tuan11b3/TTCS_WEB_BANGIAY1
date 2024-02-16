@@ -132,4 +132,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-AUTH_USER_MODEL = 'users.CustomUser' # new
+
+
+AUTH_USER_MODEL = 'users.CustomUser' # new 
+
+# after successfully logs in using DjagAuth, ex submit login form --> then redirect to this variable
+LOGIN_REDIRECT_URL = 'home'
+
+# for log out
+LOGOUT_REDIRECT_URL = 'home' # new

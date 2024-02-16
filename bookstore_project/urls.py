@@ -18,6 +18,13 @@ from django.contrib import admin
 from django.urls import path, include # new
 
 urlpatterns = [
+    # Django admin
     path('admin/', admin.site.urls),
+
+    # User management
+    path('accounts/', include('django.contrib.auth.urls')),  # with accounts prefix
+
+    # Local apps
+    path('accounts/', include('users.urls')), # new
     path('', include('pages.urls')) , # include to add pages app to main urls.py
 ]
