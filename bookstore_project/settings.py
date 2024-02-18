@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'crispy_forms', # new
     'crispy_bootstrap4', # new! Note: django-crispy-forms 2.0 the template packs are now in separate packages.
     # 'uni-form', just for test but fail
+    'allauth',
+    'allauth.account',
 
     # Local
     'users.apps.UsersConfig', # new
@@ -160,11 +162,39 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.CustomUser' # new 
 
-# after successfully logs in using DjagAuth, ex submit login form --> then redirect to this variable
-LOGIN_REDIRECT_URL = 'home'
+# # after successfully logs in using DjagAuth, ex submit login form --> then redirect to this variable
+# LOGIN_REDIRECT_URL = 'home'
 
-# for log out
-LOGOUT_REDIRECT_URL = 'home' # new
+# # for log out ????
+# LOGOUT_REDIRECT_URL = 'home' # new
+
+# why use this redirec instead above
+# django-allauth config
+LOGIN_REDIRECT_URL = 'home'
+ACCOUNT_LOGOUT_REDIRECT = 'home' # this'll overide LOGOUT_REDIRECT_URL above
 
 # set default template pack
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# django-allauth config
+SITE_ID = 1 
+
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True # On the db level, one user must have one email
+
+AUTHENTICATION_BACKENDS = (
+    # which is used Django authenticate a user
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend', # new
+)
+
+# Overide email.backend default is smtp
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #new
+
+ACCOUNT_SESSION_REMEMBER = True # alway remember
+
+# change password in one-liner
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+

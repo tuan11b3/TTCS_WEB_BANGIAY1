@@ -10,15 +10,15 @@
     {% if user.is_authenticated %}
         Hi {{ user.email }}!
         <!-- With logout must use 'post' method! -->
-        <!-- <p><a href="{% url 'logout' %}">Log Out</a></p> -->
-        <form action="{% url 'logout' %}" method="post">
+        <!-- <form action="{% url 'account_logout' %}" method="post">
             {% csrf_token %}
             <button type="submit">Logout</button>
-        </form>
+        </form> -->
+        <p><a href="{% url 'account_logout' %}">Log Out</a></p>
     {% else %}
         <p>You are not logged in</p>
         <!-- URL name auto refer to URL path -->
-        <a href="{% url 'login' %}">Log In</a> 
-        <a href="{% url 'signup' %}">Sign Up</a>
+        <a href="{% url 'account_login' %}">Log In</a> 
+        <a href="{% url 'account_signup' %}">Sign Up</a>
     {% endif %}
 {% endblock content %}
