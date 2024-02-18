@@ -39,6 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # Third-party
+    'crispy_forms', # new
+    'crispy_bootstrap4', # new! Note: django-crispy-forms 2.0 the template packs are now in separate packages.
+    # 'uni-form', just for test but fail
+
     # Local
     'users.apps.UsersConfig', # new
     'pages.apps.PagesConfig',
@@ -68,6 +73,10 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            # 'loaders': [
+            #     'django.template.loaders.filesystem.Loader',
+            #     'django.template.loaders.app_directories.Loader',
+            # ],
         },
     },
 ]
@@ -126,9 +135,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+# set statics on top-level static directory
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),] #new
+# STATIC_ROOT help web run faster
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # new
 
+# set STATICFILES_FINDERS ---> tell Django how to look static file dir
+STATICFILES_FINDERS = [
+    # looks for static files in dir specified by 'STATICFILES_DIRS'. BY DEFAULT, 
+    # it serach in dic list in STATICFILES_DIRS and each app's 'static' sub
+    "django.contrib.staticfiles.finders.FileSystemFinder",  
+
+    # this finder looks for static files in each installed app, In create django
+    #  app can include a'static' dir to store static file specific that app
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 # Default primary key field type
+
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -141,3 +165,6 @@ LOGIN_REDIRECT_URL = 'home'
 
 # for log out
 LOGOUT_REDIRECT_URL = 'home' # new
+
+# set default template pack
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
