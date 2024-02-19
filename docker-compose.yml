@@ -3,6 +3,10 @@ services:
   web:
     build: .
     command: python /code/manage.py runserver 0.0.0.0:8000
+    environment:
+      # if your secret key includes a dollar sign, $, then you need to add an additional dollar sign, $$
+      - SECRET_KEY=django-insecure-f_1!t&g_w%$cj9)7xbg^*-z4r*6&$8lw7hokp$tgh+egzf5hg#f
+      - DEBUG=1
     volumes:
       - .:/code
     ports:
