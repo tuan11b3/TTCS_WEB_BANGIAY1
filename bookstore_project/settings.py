@@ -47,10 +47,14 @@ INSTALLED_APPS = [
     # 'uni-form', just for test but fail
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
+
+    'django.contrib.sites', # Enabling the sites framwork
 
     # Local
     'users.apps.UsersConfig', # new
     'pages.apps.PagesConfig',
+    
 ]
 
 MIDDLEWARE = [
@@ -192,10 +196,21 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # Overide email.backend default is smtp
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #new
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' #new
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # new
+# Host for sending e-mail.
+EMAIL_HOST = 'smtp.gmail.com'
+# Port for sending e-mail.
+EMAIL_PORT = 587
+# Disable TLS since it's not needed for local testing
+EMAIL_USE_TLS = True  
+# Optional SMTP authentication information for EMAIL_HOST.
+EMAIL_HOST_USER = 'anhtuan11b32001@gmail.com'
+EMAIL_HOST_PASSWORD = 'cala ctfd vsvc njco'
+# congig where email from
+DEFAULT_FROM_EMAIL = 'bangiay@gmail.com'
 
 ACCOUNT_SESSION_REMEMBER = True # alway remember
 
 # change password in one-liner
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-
