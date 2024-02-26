@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     # Local
     'users.apps.UsersConfig', # new
     'pages.apps.PagesConfig',
+    'shoes.apps.ShoesConfig',
     
 ]
 

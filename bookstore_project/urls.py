@@ -28,4 +28,5 @@ urlpatterns = [
     # Local apps
     # path('accounts/', include('users.urls')), # new
     path('', include('pages.urls')) , # include to add pages app to main urls.py
+    path('shoes/', include('shoes.urls')), 
 ]
