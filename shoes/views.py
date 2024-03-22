@@ -26,25 +26,30 @@
     
 #     return render(request, 'error_not_found.html')
 
-from rest_framework import generics, permissions
+from rest_framework import generics, viewsets
 
 from .models import Product
 from .serializers import ShoesSerializer
 
 
 
-class ShoeListView(generics.ListAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ShoesSerializer
+# class ShoeListView(generics.ListAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = ShoesSerializer
 
-class ShoeDetailView(generics.RetrieveAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ShoesSerializer
+# class ShoeDetailView(generics.RetrieveAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = ShoesSerializer
 
-class PostList(generics.ListCreateAPIView):
-    queryset = Product.objects.all()
-    serializer_class = ShoesSerializer
+# class PostList(generics.ListCreateAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = ShoesSerializer
 
-class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+# class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Product.objects.all()
+#     serializer_class = ShoesSerializer
+
+class ShoesViewSet(viewsets.ModelViewSet):
+    # permission_classes = (IsAuthorOrReadOnly,)
     queryset = Product.objects.all()
     serializer_class = ShoesSerializer
