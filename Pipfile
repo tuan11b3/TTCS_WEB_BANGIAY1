@@ -11,6 +11,13 @@ django-crispy-forms = "*"
 crispy-bootstrap4 = "*"
 django-uni-form = "*"
 django-allauth = "==0.48.0"
+djangorestframework = "*"
+django-cors-headers = "*"
+django-rest-auth-forked = "*"
+coreapi = "*"
+pyyaml = "*"
+inflection = "*"
+django-rest-swagger = "*"
 
 [dev-packages]
 

@@ -40,16 +40,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites', # Enabling the sites framwork for django_allauth
 
     # Third-party
     'crispy_forms', # new
     'crispy_bootstrap4', # new! Note: django-crispy-forms 2.0 the template packs are now in separate packages.
+    'rest_framework',   # Django_rest_framework
+    'rest_framework.authtoken',     # Using token 
+    'rest_framework_swagger',
+    'rest_auth', #django_rest_auth for login, logout api
+    'corsheaders',  # allow take resoucre from different domain
+
     # 'uni-form', just for test but fail
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
-    'django.contrib.sites', # Enabling the sites framwork
+    'rest_auth.registration',
 
     # Local
     'users.apps.UsersConfig', # new
@@ -61,6 +67,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # new
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -213,5 +220,30 @@ DEFAULT_FROM_EMAIL = 'bangiay@gmail.com'
 
 ACCOUNT_SESSION_REMEMBER = True # alway remember
 
-# change password in one-liner
+# change password in one
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+
+# CORS_ORIFIN WHILIST
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+    'http://localhost:8000',
+)
+
+# REST FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+    'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication'
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+}   
+
+# test 
+# SWAGGER_SETTINGS = {
+#     'LOGIN_URL': 'rest_framework:login',
+#     'LOGOUT_URL': 'rest_framework:logout'
+# }
